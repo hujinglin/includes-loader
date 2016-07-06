@@ -1,0 +1,35 @@
+{
+  "name": "includes-loader",
+  "version": "0.0.1",
+  "description": "webpack loader for any text file and support nested includes",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/loader"
+  },
+  "keywords": [
+    "include",
+    "webpack",
+    "loader",
+    "import",
+    "require",
+    "file",
+    "text",
+    "string",
+    "common"
+  ],
+  "author": {
+    "name": "hujinglin",
+    "email": "hujinglin87@126.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hujinglin/include-loader.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "jsdom": "^9.4.1",
+    "mocha": "^2.5.3",
+    "webpack": "^1.13.1"
+  }
+}
