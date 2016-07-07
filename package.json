@@ -1,10 +1,10 @@
 {
   "name": "includes-loader",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "webpack loader for any text file and support nested includes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test/loader"
+    "test": "mocha ./test/test"
   },
   "keywords": [
     "include",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hujinglin/include-loader.git"
+    "url": "https://github.com/hujinglin/includes-loader.git"
   },
   "license": "MIT",
   "devDependencies": {

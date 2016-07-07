@@ -56,15 +56,6 @@ describe('includes-loader', function() {
         }]
       },
       includes: {
-        extensions: function (filepath) {
-          var extensions
-          if (/\.html$/.test(filepath)) {
-            extensions = ['', '.html', '.shtml', '.htm']
-          } else if (/\.glsl$/.test(filepath)) {
-            extensions = ['', '.glsl', '.vert', '.frag']
-          }
-          return extensions
-        },
         pattern: function (filepath) {
           var pattern
           if (/\.html$/.test(filepath)) {
@@ -74,6 +65,15 @@ describe('includes-loader', function() {
             }
           }
           return pattern
+        },
+        extensions: function (filepath) {
+          var extensions
+          if (/\.html$/.test(filepath)) {
+            extensions = ['', '.html', '.shtml', '.htm']
+          } else if (/\.glsl$/.test(filepath)) {
+            extensions = ['', '.glsl', '.vert', '.frag']
+          }
+          return extensions
         }
       }
     })
