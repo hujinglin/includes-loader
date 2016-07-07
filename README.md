@@ -4,7 +4,7 @@ A webpack loader for any text file, and support nested includes with flexible op
 
 ## Install
 
-```
+``` shell
 npm install  includes-loader --save-dev
 ```
 
@@ -51,7 +51,7 @@ bar
 
 __default options__
 
-```
+``` javascript
 includes: {
   pattern: {
     re: /#include "(.+?)"/,
