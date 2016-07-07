@@ -61,7 +61,9 @@ includes: {
 }
 ```
 
+
 __pattern__
+
 An object that should be used to specify how to match the include statement 
 _patten.re_ is the RegExp to match the statement
 _patten.index_ is the index of filepath in the matched results
@@ -80,7 +82,9 @@ pattern: function (filepath) {
 }
 ```
 
+
 __extensions__
+
 An array of extensions that should be used to resolve includes, If you include file with their own extension (e.g. #include './somefile.ext'), you must add an empty string in the array.
 
 ``` javascript
