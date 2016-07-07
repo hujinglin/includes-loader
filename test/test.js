@@ -12,7 +12,6 @@ var defaultConfig = {
   }
 }
 
-
 describe('includes-loader', function() {
 
   it('default', function(done) {
@@ -35,7 +34,7 @@ describe('includes-loader', function() {
           html: '<!DOCTYPE html><html><head></head><body></body></html>',
           src: [data],
           done: function (err, window) {
-            assert.equal(window.confStr, 'foo\nbar\nconf')
+            assert.equal(window.confStr, 'foo\nbar\nfoo\nbar\nconf')
             done()
           }
         })
@@ -87,8 +86,8 @@ describe('includes-loader', function() {
           html: '<!DOCTYPE html><html><head></head><body></body></html>',
           src: [data],
           done: function (err, window) {
-            assert.equal(window.htmlStr, '<p>foo</p>\n<p>bar</p>\n<p>html</p>')
-            assert.equal(window.glslStr, '// foo\n// bar\n// glsl')
+            assert.equal(window.htmlStr, '<p>foo</p>\n<p>bar</p>\n<p>foo</p>\n<p>bar</p>\n<p>html</p>')
+            assert.equal(window.glslStr, '// foo\n// bar\n// foo\n// bar\n// glsl')
             done()
           }
         })

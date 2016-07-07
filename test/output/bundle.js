@@ -51,13 +51,13 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	module.exports = "<p>foo</p>\n<p>bar</p>\n<p>html</p>"
+	module.exports = "<p>foo</p>\n<p>bar</p>\n<p>foo</p>\n<p>bar</p>\n<p>html</p>"
 
 /***/ },
 /* 2 */
 /***/ function(module, exports) {
 
-	module.exports = "// foo\n// bar\n// glsl"
+	module.exports = "// foo\n// bar\n// foo\n// bar\n// glsl"
 
 /***/ }
 /******/ ]);

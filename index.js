@@ -3,7 +3,7 @@ var path = require('path')
 
 var defaultOptions = {
   pattern: {
-    re: /#include "(.+?)"/,
+    re: /#include\s"(.+?)"/,
     index: 1
   },
   extensions: []
@@ -24,10 +24,10 @@ module.exports = function (source) {
 function parse(loader, source) {
 
   try {
+
     var filepath = loader.resourcePath
     var filepathParse = path.parse(filepath)
     var options = Object.assign({}, defaultOptions, loader.options.includes)
-    var data = source
 
     if (typeof options.pattern === 'function') {
       options.pattern = options.pattern(filepath)
@@ -58,57 +58,83 @@ function parse(loader, source) {
       throw new Error('includes-loader: extensions is invalid')
     }
 
-    parseIncludes(loader, source, data, filepath, options)
-    
+    loader.source = source
+
+    loader.options = options
+
+    loader.includes = []
+
+    parseIncludes(loader, filepath, source)
+
   } catch (err) {
     loader.callback(err)
   }
+
 }
 
+function parseIncludes(loader, filepath, data) {
 
-function parseIncludes(loader, source, data, filepath, options) {
   try {
-    var includes = []
-    var filepathParse = path.parse(filepath)
 
-    data.replace(options.pattern.re, function () {
-      includes.push({
-        target: arguments[0],
-        path: arguments[options.pattern.index]
-      })
+    var fileparse = path.parse(filepath)
+
+    data.replace(loader.options.pattern.re, function () {
+
+      var include = {
+        iDir: fileparse.dir,
+        iPath: arguments[loader.options.pattern.index],
+        iTarget: arguments[0],
+        iExtensions: [].concat(loader.options.extensions)
+      }
+
+      loader.includes.push({include})
+
+      parseFile(loader, include)
+
     })
 
-    if (includes.length === 0) {
-      loader.callback(null, 'module.exports = ' + JSON.stringify(source))
-    } else {
-      includes.forEach(function (include) {
-        var filebase = path.resolve(filepathParse.dir, include.path)
-        var extensions = [].concat(options.extensions)
-        parseSource(loader, source, include, filebase, extensions, options)
-      })
-    }
   } catch (err) {
     loader.callback(err)
   }
 }
 
-function parseSource(loader, source, include, filebase, extensions, options) {
+
+function parseFile(loader, include) {
   try {
-    if (extensions.length < 1) {
-      throw new Error('includes-loader: can not find file ' + filebase)
-    } else {
-      var filepath = filebase + extensions.shift()
-      fs.readFile(filepath, 'utf-8', function (err, data) {
-        if (err) {
-          parseSource(loader, source, include, filebase, extensions, options)
+    var extension = include.iExtensions.shift()
+    var filepath = path.resolve(include.iDir, include.iPath + extension)
+    fs.readFile(filepath, 'utf-8', function (err, data) {
+      if (err) {
+        if (include.iExtensions.length) {
+          parseFile(loader, include)
         } else {
-          source = source.replace(include.target, data)
-          parseIncludes(loader, source, data, filepath, options)
-          loader.dependency(filepath);
+          loader.callback(new Error('includes-loader: can not find file ' + filepath))
         }
-      })
-    }
+      } else {
+        var index = loader.includes.indexOf(include)
+        loader.source = loader.source.replace(include.iTarget, data)
+        loader.includes.splice(index, 1)
+        parseIncludes(loader, filepath, data)
+        if (loader.includes.length === 0) {
+          loader.callback(null, 'module.exports = ' + JSON.stringify(loader.source))
+        }
+      }
+    })
   } catch (err) {
     loader.callback(err)
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
