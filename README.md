@@ -54,7 +54,7 @@ __default options__
 ``` javascript
 includes: {
   pattern: {
-    re: /#include "(.+?)"/,
+    re: /#include\s+?"(.+?)";*?/,
     index: 1
   },
   extensions: [] // the extension will be same to the including file

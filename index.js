@@ -3,7 +3,7 @@ var path = require('path')
 
 var defaultOptions = {
   pattern: {
-    re: /#include\s"(.+?)"/,
+    re: /#include\s+?"(.+?)";*?/,
     index: 1
   },
   extensions: []
