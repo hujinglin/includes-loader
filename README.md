@@ -65,7 +65,7 @@ includes: {
 __pattern__
 
 An object that should be used to specify how to match the include statement 
-_patten.re_ is the RegExp to match the statement
+_patten.re_ is the RegExp to match the include statement
 _patten.index_ is the index of filepath in the matched results
 
 ``` javascript

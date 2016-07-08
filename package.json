@@ -1,21 +1,21 @@
 {
   "name": "includes-loader",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "webpack loader for any text file and support nested includes",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./test/test"
   },
   "keywords": [
-    "include",
-    "webpack",
+    "includes",
     "loader",
+    "webpack",
+    "include",
     "import",
     "require",
     "file",
     "text",
-    "string",
-    "common"
+    "string"
   ],
   "author": {
     "name": "hujinglin",
