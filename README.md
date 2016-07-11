@@ -69,7 +69,7 @@ _patten.re_ is the RegExp to match the include statement
 _patten.index_ is the index of filepath in the matched results
 
 ``` javascript
-\\ can be set to a function with filepath argument
+// can be set to a function with filepath argument
 pattern: function (filepath) {
   var pattern
   if (/\.html$/.test(filepath)) {
@@ -88,7 +88,7 @@ __extensions__
 An array of extensions that should be used to resolve includes, If you include file with their own extension (e.g. #include './somefile.ext'), you must add an empty string in the array.
 
 ``` javascript
-\\ can be set to a function with filepath argument
+// can be set to a function with filepath argument
 extensions: function (filepath) {
   var extensions
   if (/\.html$/.test(filepath)) {
