@@ -64,7 +64,11 @@ function parse(loader, source) {
 
     loader.includes = []
 
-    parseIncludes(loader, filepath, source)
+    if (options.pattern.re.test(source)) {
+      parseIncludes(loader, filepath, source)
+    } else {
+      loader.callback(null, 'module.exports = ' + JSON.stringify(loader.source))
+    }
 
   } catch (err) {
     loader.callback(err)

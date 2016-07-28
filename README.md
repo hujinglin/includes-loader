@@ -2,7 +2,7 @@
 
 A webpack loader for any text file, and support nested includes with flexible options
 
-## Install
+## Installation
 
 ``` shell
 npm install  includes-loader --save-dev
