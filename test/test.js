@@ -4,6 +4,11 @@ var jsdom = require('jsdom')
 var webpack = require('webpack')
 var assert = require('chai').assert
 var loaderPath = path.resolve(__dirname, '../')
+var eol = require('os').EOL
+
+function equal(actual, expected) {
+  assert.equal(actual, expected.replace(/\n/g, eol))
+}
 
 var defaultConfig = {
   output: {
@@ -34,7 +39,7 @@ describe('includes-loader', function() {
           html: '<!DOCTYPE html><html><head></head><body></body></html>',
           src: [data],
           done: function (err, window) {
-            assert.equal(window.confStr, 'foo\nbar\nfoo\nbar\nconf')
+            equal(window.confStr, 'foo\nbar\nfoo\nbar\nconf')
             done()
           }
         })
@@ -86,8 +91,8 @@ describe('includes-loader', function() {
           html: '<!DOCTYPE html><html><head></head><body></body></html>',
           src: [data],
           done: function (err, window) {
-            assert.equal(window.htmlStr, '<p>foo</p>\n<p>bar</p>\n<p>foo</p>\n<p>bar</p>\n<p>html</p>')
-            assert.equal(window.glslStr, '// foo\n// bar\n// foo\n// bar\n// glsl')
+            equal(window.htmlStr, '<p>foo</p>\n<p>bar</p>\n<p>foo</p>\n<p>bar</p>\n<p>html</p>')
+            equal(window.glslStr, '// foo\n// bar\n// foo\n// bar\n// glsl')
             done()
           }
         })
