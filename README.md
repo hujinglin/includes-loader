@@ -1,6 +1,6 @@
 # includes-loader
 
-A webpack loader for any text file, and support nested includes with flexible options
+A webpack loader for any text file, which supports nested includes with flexible options
 
 ## Installation
 
@@ -15,7 +15,7 @@ npm install  includes-loader --save-dev
 var confStr = require('includes!./file.conf')'
 // confStr is 'foo\nbar\nconf'
 ```
-__Details as follow__
+__Details as follows__
 
 directory
 
@@ -100,7 +100,7 @@ extensions: function (filepath) {
 }
 ```
 
-### expamle webpack.config
+### example webpack.config
 
 ``` javascript
 module.exports = {
